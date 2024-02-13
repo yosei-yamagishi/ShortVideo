@@ -3,9 +3,14 @@ import Combine
 
 class ShortVideosViewModel: UDFViewModel {
     enum Action {
+        case viewDidLoad
+        case viewWillAppear
+        case playVideo
         case mute
         case like
+        case playOrPause
         case setCurrentIndex(currentIndex: Int)
+        case didChangeVideo(currentIndex: Int)
     }
     
     struct State {
@@ -13,6 +18,7 @@ class ShortVideosViewModel: UDFViewModel {
         var isMuted: Bool = false
         var isLiked: Bool = false
         var currentIndex: Int = 0
+        var isPlaying: Bool? = nil
     }
     
     @Published var state: State
@@ -28,19 +34,32 @@ class ShortVideosViewModel: UDFViewModel {
     
     func send(_ action: Action) {
         switch action {
+        case .viewDidLoad:
+            initAndSetupPlayer()
+        case .viewWillAppear:
+            playVideo()
         case let .setCurrentIndex(currentIndex):
             self.state.currentIndex = currentIndex
+        case .playVideo:
+            playVideo()
         case .mute:
             state.isMuted.toggle()
             videoPlayer.mute(isMuted: state.isMuted)
         case .like:
             state.isLiked.toggle()
+        case .playOrPause:
+            videoPlayer.playOrPause()
+            state.isPlaying = videoPlayer.isPlaying
+        case .didChangeVideo(currentIndex: let currentIndex):
+            initAndSetupPlayer(
+                currentIndex: currentIndex
+            )
         }
     }
 }
 
 extension ShortVideosViewModel {
-    func initAndSetupPlayer(currentIndex: Int = 0) {
+    private func initAndSetupPlayer(currentIndex: Int = 0) {
         videoPlayer.pauseAndInit()
         let videoUrlString = state.videos[currentIndex].videoUrlString
         let url = Bundle.main.bundleURL
@@ -48,7 +67,8 @@ extension ShortVideosViewModel {
         videoPlayer.prepare(url: url)
     }
     
-    func playVideo() {
+    private func playVideo() {
         videoPlayer.play(isMuted: state.isMuted)
+        state.isPlaying = videoPlayer.isPlaying
     }
 }

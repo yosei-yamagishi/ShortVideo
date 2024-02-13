@@ -60,6 +60,11 @@ class ShortVideoCollectionView: NibLoadableView {
         cell.setLikeImage(isLiked: isLiked)
     }
     
+    func playOrPause(isPlaying: Bool?, currentIndex: Int) {
+        guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
+        cell.setPlayImage(isPlaying: isPlaying)
+    }
+    
     private func getShortVideoCell(
         currentIndex: Int
     ) -> ShortVideoCell? {

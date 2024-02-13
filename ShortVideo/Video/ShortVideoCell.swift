@@ -38,4 +38,8 @@ class ShortVideoCell: UICollectionViewCell {
     func setLikeImage(isLiked: Bool) {
         shortContentVideoView.setLikeImage(isLiked: isLiked)
     }
+    
+    func setPlayImage(isPlaying: Bool?) {
+        shortContentVideoView.setPlayImage(isPlaying: isPlaying)
+    }
 }

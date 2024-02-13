@@ -9,6 +9,7 @@ protocol VideoPlayerControlProtocol {
     var currentTime: Float { get }
     var duration: Float { get }
     var delegate: VideoPlayerDelegate? { get set }
+    func playOrPause()
     func play()
     func pause()
     func skipForward()
@@ -58,6 +59,10 @@ class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
     func prepare(url: URL) {
         let item = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: item)
+    }
+    
+    func playOrPause() {
+        isPlaying ? player?.pause() : player?.play()
     }
     
     func play() {

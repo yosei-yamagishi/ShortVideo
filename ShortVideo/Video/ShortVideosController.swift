@@ -31,7 +31,7 @@ class ShortVideosController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        viewModel.initAndSetupPlayer()
+        viewModel.send(.viewDidLoad)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +45,7 @@ class ShortVideosController: UIViewController {
         shortVideoCollectionView.setupPlayer(
             avPlayer: videoPlayer.player
         )
-        viewModel.playVideo()
+        viewModel.send(.viewWillAppear)
     }
     
     private func bindViewModel() {
@@ -65,6 +65,16 @@ class ShortVideosController: UIViewController {
                 guard let self else { return }
                 self.shortVideoCollectionView.like(
                     isLiked: isLiked,
+                    currentIndex: self.viewModel.state.currentIndex
+                )
+            }).store(in: &cancellables)
+        
+        viewModel.$state.map(\.isPlaying)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] isPlaying in
+                guard let self else { return }
+                self.shortVideoCollectionView.playOrPause(
+                    isPlaying: isPlaying,
                     currentIndex: self.viewModel.state.currentIndex
                 )
             }).store(in: &cancellables)
@@ -89,6 +99,7 @@ extension ShortVideosController: UICollectionViewDataSource {
         )
         cell.setMuteImage(isMuted: viewModel.state.isMuted)
         cell.setLikeImage(isLiked: viewModel.state.isLiked)
+        cell.setPlayImage(isPlaying: nil)
         if indexPath.item == viewModel.state.currentIndex {
             cell.setupPlayer(avPlayer: videoPlayer.player)
         } else {
@@ -99,6 +110,10 @@ extension ShortVideosController: UICollectionViewDataSource {
 }
 
 extension ShortVideosController: ShortVideoContentViewDelegate {
+    func playOrPause() {
+        viewModel.send(.playOrPause)
+    }
+    
     func mute() {
         viewModel.send(.mute)
     }
@@ -115,13 +130,10 @@ extension ShortVideosController: VideoCollectionViewDelegate {
                 currentIndex: currentIndex
             )
         )
-        
-        viewModel.initAndSetupPlayer(
-            currentIndex: currentIndex
-        )
+        viewModel.send(.didChangeVideo(currentIndex: currentIndex))
         shortVideoCollectionView.setupPlayer(
             avPlayer: videoPlayer.player
         )
-        viewModel.playVideo()
+        viewModel.send(.playVideo)
     }
 }
