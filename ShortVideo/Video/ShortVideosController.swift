@@ -31,7 +31,7 @@ class ShortVideosController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        viewModel.initAndSetupPlayer()
+        viewModel.send(.viewDidLoad)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +45,7 @@ class ShortVideosController: UIViewController {
         shortVideoCollectionView.setupPlayer(
             avPlayer: videoPlayer.player
         )
-        viewModel.playVideo()
+        viewModel.send(.viewWillAppear)
     }
     
     private func bindViewModel() {
@@ -130,13 +130,10 @@ extension ShortVideosController: VideoCollectionViewDelegate {
                 currentIndex: currentIndex
             )
         )
-        
-        viewModel.initAndSetupPlayer(
-            currentIndex: currentIndex
-        )
+        viewModel.send(.didChangeVideo(currentIndex: currentIndex))
         shortVideoCollectionView.setupPlayer(
             avPlayer: videoPlayer.player
         )
-        viewModel.playVideo()
+        viewModel.send(.playVideo)
     }
 }
