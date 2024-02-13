@@ -3,6 +3,7 @@ import UIKit
 protocol ShortVideoContentViewDelegate: AnyObject {
     func mute()
     func like()
+    func playOrPause()
 }
 
 class ShortVideoContentView: NibLoadableView {
@@ -17,6 +18,22 @@ class ShortVideoContentView: NibLoadableView {
                 action,
                 for: .touchUpInside
             )
+        }
+    }
+    @IBOutlet weak var playImageView: UIImageView! {
+        didSet {
+            playImageView.image = nil
+        }
+    }
+    
+    @IBOutlet weak var playOrPauseView: UIView! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(
+                target: self,
+                action: #selector(playOrPause)
+            )
+            playOrPauseView.addGestureRecognizer(tapGesture)
+            playOrPauseView.isUserInteractionEnabled = true
         }
     }
     
@@ -57,5 +74,32 @@ class ShortVideoContentView: NibLoadableView {
             likeImage,
             for: .normal
         )
+    }
+    
+    func setPlayImage(isPlaying: Bool?) {
+        if let isPlaying = isPlaying {
+            let playImage: UIImage? = isPlaying
+                ? nil
+                : UIImage(systemName: "play.fill")
+            self.playImageView.image = playImage
+            
+            playImageView.alpha = 0.5
+
+            // 影の設定
+            self.playImageView.layer.shadowColor = UIColor.black.cgColor // 影の色
+            self.playImageView.layer.shadowOpacity = 0.7 // 影の不透明度
+            self.playImageView.layer.shadowOffset = CGSize(width: 4, height: 4) // 影のオフセット
+            self.playImageView.layer.shadowRadius = 5 // 影のぼかし半径
+            self.playImageView.layer.masksToBounds = false
+        } else {
+            self.playImageView.image = nil
+
+            // 影をクリア
+            self.playImageView.layer.shadowOpacity = 0
+        }
+    }
+    
+    @objc private func playOrPause() {
+        delegate?.playOrPause()
     }
 }

@@ -5,6 +5,7 @@ class ShortVideosViewModel: UDFViewModel {
     enum Action {
         case mute
         case like
+        case playOrPause
         case setCurrentIndex(currentIndex: Int)
     }
     
@@ -13,6 +14,7 @@ class ShortVideosViewModel: UDFViewModel {
         var isMuted: Bool = false
         var isLiked: Bool = false
         var currentIndex: Int = 0
+        var isPlaying: Bool? = nil
     }
     
     @Published var state: State
@@ -35,6 +37,9 @@ class ShortVideosViewModel: UDFViewModel {
             videoPlayer.mute(isMuted: state.isMuted)
         case .like:
             state.isLiked.toggle()
+        case .playOrPause:
+            videoPlayer.playOrPause()
+            state.isPlaying = videoPlayer.isPlaying
         }
     }
 }
@@ -50,5 +55,6 @@ extension ShortVideosViewModel {
     
     func playVideo() {
         videoPlayer.play(isMuted: state.isMuted)
+        state.isPlaying = videoPlayer.isPlaying
     }
 }

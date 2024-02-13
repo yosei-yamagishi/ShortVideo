@@ -68,6 +68,16 @@ class ShortVideosController: UIViewController {
                     currentIndex: self.viewModel.state.currentIndex
                 )
             }).store(in: &cancellables)
+        
+        viewModel.$state.map(\.isPlaying)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] isPlaying in
+                guard let self else { return }
+                self.shortVideoCollectionView.playOrPause(
+                    isPlaying: isPlaying,
+                    currentIndex: self.viewModel.state.currentIndex
+                )
+            }).store(in: &cancellables)
     }
 }
 
@@ -89,6 +99,7 @@ extension ShortVideosController: UICollectionViewDataSource {
         )
         cell.setMuteImage(isMuted: viewModel.state.isMuted)
         cell.setLikeImage(isLiked: viewModel.state.isLiked)
+        cell.setPlayImage(isPlaying: nil)
         if indexPath.item == viewModel.state.currentIndex {
             cell.setupPlayer(avPlayer: videoPlayer.player)
         } else {
@@ -99,6 +110,10 @@ extension ShortVideosController: UICollectionViewDataSource {
 }
 
 extension ShortVideosController: ShortVideoContentViewDelegate {
+    func playOrPause() {
+        viewModel.send(.playOrPause)
+    }
+    
     func mute() {
         viewModel.send(.mute)
     }
