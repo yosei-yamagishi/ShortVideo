@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShortVideoView" customModule="ShortVideo" customModuleProvider="target">
+            <connections>
+                <outlet property="thumbnailImageView" destination="Yog-Ya-BYq" id="xn7-tv-y1H"/>
+                <outlet property="videoPreviewView" destination="hbF-hS-9hQ" id="csc-Bw-Qye"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="544"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yog-Ya-BYq">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="544"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbF-hS-9hQ" customClass="VideoPreviewView" customModule="ShortVideo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="544"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Yog-Ya-BYq" secondAttribute="trailing" id="KS3-zU-P08"/>
+                <constraint firstItem="Yog-Ya-BYq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Vde-2g-6TM"/>
+                <constraint firstItem="hbF-hS-9hQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aLT-zz-IsY"/>
+                <constraint firstAttribute="bottom" secondItem="hbF-hS-9hQ" secondAttribute="bottom" id="cbK-Fo-uyo"/>
+                <constraint firstAttribute="trailing" secondItem="hbF-hS-9hQ" secondAttribute="trailing" id="dvI-UA-AEa"/>
+                <constraint firstAttribute="bottom" secondItem="Yog-Ya-BYq" secondAttribute="bottom" id="jNe-FC-TJJ"/>
+                <constraint firstItem="hbF-hS-9hQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="n6s-Bb-fWW"/>
+                <constraint firstItem="Yog-Ya-BYq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rsP-At-gnE"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="134.78260869565219" y="189.50892857142856"/>
+        </view>
+    </objects>
+</document>

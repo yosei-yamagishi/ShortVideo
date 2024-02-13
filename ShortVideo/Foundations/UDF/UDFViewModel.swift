@@ -1,0 +1,1 @@
+protocol UDFViewModel: ActionSender, StateHolder {}
