@@ -42,4 +42,14 @@ class ShortVideoCell: UICollectionViewCell {
     func setPlayImage(isPlaying: Bool?) {
         shortContentVideoView.setPlayImage(isPlaying: isPlaying)
     }
+    
+    func setupSlider(duration: Float) {
+        shortContentVideoView.setupVideoSlider(
+            duration: duration
+        )
+    }
+    
+    func setupThumbImage(thumbImage: UIImage?) {
+        shortContentVideoView.setupSliderThumbImage(thumbImage: thumbImage)
+    }
 }

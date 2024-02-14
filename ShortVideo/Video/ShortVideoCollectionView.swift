@@ -37,18 +37,6 @@ class ShortVideoCollectionView: NibLoadableView {
             collectionView.dataSource = dataSource
         }
     }
-    private var videos: [Video] = []
-    private var avPlayer: AVPlayer?
-    
-    func setupVideos(videos: [Video]) {
-        self.videos = videos
-        self.collectionView.reloadData()
-    }
-    
-    func setupPlayer(avPlayer: AVPlayer?) {
-        self.avPlayer = avPlayer
-        self.collectionView.reloadData()
-    }
     
     func mute(isMuted: Bool, currentIndex: Int) {
         guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
@@ -63,6 +51,21 @@ class ShortVideoCollectionView: NibLoadableView {
     func playOrPause(isPlaying: Bool?, currentIndex: Int) {
         guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
         cell.setPlayImage(isPlaying: isPlaying)
+    }
+    
+    func setup(currentIndex: Int, video: Video) {
+        guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
+        cell.setupSlider(
+            duration: video.secondDuration
+        )
+    }
+    
+    func setThumbImageForSeeking(
+        currentIndex: Int,
+        thumbImage: UIImage?
+    ) {
+        guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
+        cell.setupThumbImage(thumbImage: thumbImage)
     }
     
     private func getShortVideoCell(

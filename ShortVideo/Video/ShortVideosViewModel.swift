@@ -61,9 +61,7 @@ class ShortVideosViewModel: UDFViewModel {
 extension ShortVideosViewModel {
     private func initAndSetupPlayer(currentIndex: Int = 0) {
         videoPlayer.pauseAndInit()
-        let videoUrlString = state.videos[currentIndex].videoUrlString
-        let url = Bundle.main.bundleURL
-            .appendingPathComponent(videoUrlString)
+        let url = state.videos[currentIndex].videoUrl
         videoPlayer.prepare(url: url)
     }
     

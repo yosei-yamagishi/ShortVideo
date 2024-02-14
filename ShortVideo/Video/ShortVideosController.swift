@@ -13,6 +13,7 @@ class ShortVideosController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private let videoPlayer: VideoPlayerProtocol
     private let viewModel: ShortVideosViewModel
+    private var thumbnailImageGenerator: ThumbnailImageGenerator?
 
     init(
         videoPlayer: VideoPlayerProtocol = VideoPlayer(),
@@ -39,12 +40,6 @@ class ShortVideosController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationItem.largeTitleDisplayMode = .never
         
-        shortVideoCollectionView.setupVideos(
-            videos: viewModel.state.videos
-        )
-        shortVideoCollectionView.setupPlayer(
-            avPlayer: videoPlayer.player
-        )
         viewModel.send(.viewWillAppear)
     }
     
@@ -76,6 +71,20 @@ class ShortVideosController: UIViewController {
                 self.shortVideoCollectionView.playOrPause(
                     isPlaying: isPlaying,
                     currentIndex: self.viewModel.state.currentIndex
+                )
+            }).store(in: &cancellables)
+        
+        viewModel.$state.map(\.currentIndex)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] currentIndex in
+                guard let self else { return }
+                let video = self.viewModel.state.videos[currentIndex]
+                self.shortVideoCollectionView.setup(
+                    currentIndex: currentIndex,
+                    video: video
+                )
+                self.thumbnailImageGenerator = ThumbnailImageGenerator(
+                    url: video.videoUrl
                 )
             }).store(in: &cancellables)
     }
@@ -110,6 +119,18 @@ extension ShortVideosController: UICollectionViewDataSource {
 }
 
 extension ShortVideosController: ShortVideoContentViewDelegate {
+    func didChangedSliderValue(value: Float) {
+        Task.detached {
+            do {
+                let thumbImage = try await self.thumbnailImageGenerator?.updateThumbnail(currentSecond: value)
+                await self.shortVideoCollectionView.setThumbImageForSeeking(
+                    currentIndex: self.viewModel.state.currentIndex,
+                    thumbImage: thumbImage
+                )
+            }
+        }
+    }
+    
     func playOrPause() {
         viewModel.send(.playOrPause)
     }
@@ -131,9 +152,6 @@ extension ShortVideosController: VideoCollectionViewDelegate {
             )
         )
         viewModel.send(.didChangeVideo(currentIndex: currentIndex))
-        shortVideoCollectionView.setupPlayer(
-            avPlayer: videoPlayer.player
-        )
         viewModel.send(.playVideo)
     }
 }
