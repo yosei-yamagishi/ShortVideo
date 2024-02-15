@@ -7,7 +7,6 @@ protocol ShortVideoSliderDelegete: AnyObject {
 }
 
 class ShortVideoSlider: UISlider {
-    
     weak var delegate: ShortVideoSliderDelegete?
     
     // ジェスチャー認識のための変数を追加

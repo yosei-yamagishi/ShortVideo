@@ -124,6 +124,15 @@ class ShortVideoContentView: NibLoadableView {
     @objc private func playOrPause() {
         delegate?.playOrPause()
     }
+    
+    func updateCurrentTime(
+        currentSecondTime: Float
+    ) {
+        if videoSlider.isTracking {
+            return
+        }
+        videoSlider.value = currentSecondTime
+    }
 }
 
 extension ShortVideoContentView {

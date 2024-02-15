@@ -45,6 +45,7 @@ class ShortVideosController: UIViewController {
     
     private func bindViewModel() {
         viewModel.$state.map(\.isMuted)
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] isMuted in
                 guard let self else { return }
@@ -55,6 +56,7 @@ class ShortVideosController: UIViewController {
             }).store(in: &cancellables)
         
         viewModel.$state.map(\.isLiked)
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] isLiked in
                 guard let self else { return }
@@ -65,6 +67,7 @@ class ShortVideosController: UIViewController {
             }).store(in: &cancellables)
         
         viewModel.$state.map(\.isPlaying)
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] isPlaying in
                 guard let self else { return }
@@ -75,6 +78,7 @@ class ShortVideosController: UIViewController {
             }).store(in: &cancellables)
         
         viewModel.$state.map(\.currentIndex)
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] currentIndex in
                 guard let self else { return }
@@ -85,6 +89,17 @@ class ShortVideosController: UIViewController {
                 )
                 self.thumbnailImageGenerator = ThumbnailImageGenerator(
                     url: video.videoUrl
+                )
+            }).store(in: &cancellables)
+        
+        viewModel.$state.map(\.currentSecondTime)
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] currentSecondTime in
+                guard let self else { return }
+                self.shortVideoCollectionView.updateCurrentTime(
+                    currentIndex: self.viewModel.state.currentIndex,
+                    currentSecondTime: currentSecondTime
                 )
             }).store(in: &cancellables)
     }

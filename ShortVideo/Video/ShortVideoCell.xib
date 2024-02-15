@@ -37,7 +37,7 @@
             </constraints>
             <size key="customSize" width="292" height="433"/>
             <connections>
-                <outlet property="shortContentVideoView" destination="Zyp-ed-Sq0" id="iT8-qC-fMI"/>
+                <outlet property="shortVideoContentView" destination="Zyp-ed-Sq0" id="iT8-qC-fMI"/>
                 <outlet property="shortVideoView" destination="QXq-Cf-b1P" id="XaE-B4-SHg"/>
             </connections>
             <point key="canvasLocation" x="311.59420289855075" y="199.88839285714286"/>

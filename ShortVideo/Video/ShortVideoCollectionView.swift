@@ -68,6 +68,14 @@ class ShortVideoCollectionView: NibLoadableView {
         cell.setupThumbImage(thumbImage: thumbImage)
     }
     
+    func updateCurrentTime(
+        currentIndex: Int,
+        currentSecondTime: Float
+    ) {
+        guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
+        cell.updateCurrentTime(currentSecondTime: currentSecondTime)
+    }
+    
     private func getShortVideoCell(
         currentIndex: Int
     ) -> ShortVideoCell? {
