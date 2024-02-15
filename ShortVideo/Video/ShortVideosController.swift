@@ -90,6 +90,10 @@ class ShortVideosController: UIViewController {
                 self.thumbnailImageGenerator = ThumbnailImageGenerator(
                     url: video.videoUrl
                 )
+                self.shortVideoCollectionView.setupPlayer(
+                    avPlayer: self.videoPlayer.player,
+                    currentIndex: currentIndex
+                )
             }).store(in: &cancellables)
         
         viewModel.$state.map(\.currentSecondTime)

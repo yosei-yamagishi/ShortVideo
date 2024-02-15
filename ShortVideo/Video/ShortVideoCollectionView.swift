@@ -38,6 +38,11 @@ class ShortVideoCollectionView: NibLoadableView {
         }
     }
     
+    func setupPlayer(avPlayer: AVPlayer?, currentIndex: Int) {
+        guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
+        cell.setupPlayer(avPlayer: avPlayer)
+    }
+    
     func mute(isMuted: Bool, currentIndex: Int) {
         guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
         cell.setMuteImage(isMuted: isMuted)
