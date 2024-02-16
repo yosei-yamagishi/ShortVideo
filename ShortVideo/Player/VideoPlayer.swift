@@ -59,6 +59,7 @@ class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
     func prepare(url: URL) {
         let item = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: item)
+        setupEndPlaybackObserver()
     }
     
     func playOrPause() {
@@ -79,6 +80,8 @@ class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
     }
     
     func pauseAndInit() {
+        NotificationCenter.default.removeObserver(self)
+        
         player?.pause()
         player?.replaceCurrentItem(with: nil)
         if let timeerObserver {
@@ -141,5 +144,21 @@ class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
                 )
             }
         )
+    }
+
+    private func setupEndPlaybackObserver() {
+        NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime,
+            object: player?.currentItem,
+            queue: .main
+        ) { [weak self] _ in
+            self?.player?.seek(to: CMTime.zero)
+            self?.player?.play()
+        }
+    }
+
+    @objc private func playerItemDidReachEnd(notification: Notification) {
+        player?.seek(to: CMTime.zero)
+        player?.play()
     }
 }
