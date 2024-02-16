@@ -23,6 +23,12 @@ class ShortVideoSlider: UISlider {
     }
     
     private func commonInit() {
+        // スライダーのプログレスの色を設定
+        self.minimumTrackTintColor = UIColor.red
+
+        // スライダーのベースの色を設定
+        self.maximumTrackTintColor = UIColor.gray
+        
         // 初期状態ではつまみを非表示にする
         setThumbImage(UIImage(), for: .normal)
         
