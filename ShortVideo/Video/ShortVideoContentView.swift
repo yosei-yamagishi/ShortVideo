@@ -5,6 +5,7 @@ protocol ShortVideoContentViewDelegate: AnyObject {
     func like()
     func playOrPause()
     func didChangedSliderValue(value: Float)
+    func didEndTracking(value: Float)
 }
 
 class ShortVideoContentView: NibLoadableView {
@@ -178,12 +179,11 @@ extension ShortVideoContentView: ShortVideoSliderDelegete {
         }
     }
     
-    func endTracking() {
-        UIView.animate(withDuration: 0.1) { [weak self] in
-            self?.baseView?.alpha = 1
-            self?.sliderThumbImageBaseView.alpha = 0
-            self?.videoSlider.transform = CGAffineTransform.identity
-        }
+    func endTracking(value: Float) {
+        baseView?.alpha = 1
+        sliderThumbImageBaseView.alpha = 0
+        videoSlider.transform = .identity
+        delegate?.didEndTracking(value: value)
     }
     
     func valueDidChange(value: Float, slider: UISlider) {

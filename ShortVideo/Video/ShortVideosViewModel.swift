@@ -11,6 +11,7 @@ class ShortVideosViewModel: UDFViewModel {
         case playOrPause
         case setCurrentIndex(currentIndex: Int)
         case didChangeVideo(currentIndex: Int)
+        case didEndTracking(value: Float)
     }
     
     struct State {
@@ -55,6 +56,8 @@ class ShortVideosViewModel: UDFViewModel {
             initAndSetupPlayer(
                 currentIndex: currentIndex
             )
+        case let .didEndTracking(value: value):
+            videoPlayer.setCurrentTime(currentTime: value)
         }
     }
 }

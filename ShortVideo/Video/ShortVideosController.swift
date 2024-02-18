@@ -138,6 +138,12 @@ extension ShortVideosController: UICollectionViewDataSource {
 }
 
 extension ShortVideosController: ShortVideoContentViewDelegate {
+    func didEndTracking(value: Float) {
+        viewModel.send(
+            .didEndTracking(value: value)
+        )
+    }
+    
     func didChangedSliderValue(value: Float) {
         Task.detached {
             do {

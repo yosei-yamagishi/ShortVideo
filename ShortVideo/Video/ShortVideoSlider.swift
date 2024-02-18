@@ -2,7 +2,7 @@ import UIKit
 
 protocol ShortVideoSliderDelegete: AnyObject {
     func beginTracking()
-    func endTracking()
+    func endTracking(value: Float)
     func valueDidChange(value: Float, slider: UISlider)
 }
 
@@ -97,7 +97,7 @@ class ShortVideoSlider: UISlider {
         _ touch: UITouch?,
         with event: UIEvent?
     ) {
-        delegate?.endTracking()
+        delegate?.endTracking(value: value)
         setThumbImage(UIImage(), for: .normal)
         super.endTracking(touch, with: event)
     }
