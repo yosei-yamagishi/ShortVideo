@@ -4,9 +4,30 @@ protocol ShortVideoContentViewDelegate: AnyObject {
     func mute()
     func like()
     func playOrPause()
+    func didChangedSliderValue(value: Float)
+    func didEndTracking(value: Float)
 }
 
 class ShortVideoContentView: NibLoadableView {
+    @IBOutlet weak var baseView: UIView!
+    @IBOutlet weak var sliderThumbImage: UIImageView!
+    @IBOutlet weak var sliderThumbView: UIView! {
+        didSet {
+            sliderThumbView.maskCorner(radius: 8)
+        }
+    }
+    @IBOutlet weak var sliderThumbImageBaseView: UIView! {
+        didSet {
+            sliderThumbImageBaseView.alpha = 0
+        }
+    }
+    @IBOutlet weak var currentTimeView: UIView! {
+        didSet {
+            currentTimeView.allMaskCorner()
+        }
+    }
+    @IBOutlet weak var currentTimeLabel: UILabel!
+    @IBOutlet weak var durationTimeLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton! {
@@ -48,6 +69,11 @@ class ShortVideoContentView: NibLoadableView {
             )
         }
     }
+    @IBOutlet weak var videoSlider: ShortVideoSlider! {
+        didSet {
+            videoSlider.delegate = self
+        }
+    }
     
     weak var delegate: ShortVideoContentViewDelegate?
     
@@ -58,8 +84,8 @@ class ShortVideoContentView: NibLoadableView {
     
     func setMuteImage(isMuted: Bool) {
         let muteImage = isMuted
-            ? UIImage(systemName: "speaker.slash")
-            : UIImage(systemName: "speaker.wave.2")
+        ? UIImage(systemName: "speaker.slash")
+        : UIImage(systemName: "speaker.wave.2")
         self.muteButton.setImage(
             muteImage,
             for: .normal
@@ -68,8 +94,8 @@ class ShortVideoContentView: NibLoadableView {
     
     func setLikeImage(isLiked: Bool) {
         let likeImage = isLiked
-            ? UIImage(systemName: "heart.fill")
-            : UIImage(systemName: "heart")
+        ? UIImage(systemName: "heart.fill")
+        : UIImage(systemName: "heart")
         self.likeButton.setImage(
             likeImage,
             for: .normal
@@ -79,12 +105,10 @@ class ShortVideoContentView: NibLoadableView {
     func setPlayImage(isPlaying: Bool?) {
         if let isPlaying = isPlaying {
             let playImage: UIImage? = isPlaying
-                ? nil
-                : UIImage(systemName: "play.fill")
+            ? nil
+            : UIImage(systemName: "play.fill")
             self.playImageView.image = playImage
-            
             playImageView.alpha = 0.5
-
             // 影の設定
             self.playImageView.layer.shadowColor = UIColor.black.cgColor // 影の色
             self.playImageView.layer.shadowOpacity = 0.7 // 影の不透明度
@@ -93,7 +117,6 @@ class ShortVideoContentView: NibLoadableView {
             self.playImageView.layer.masksToBounds = false
         } else {
             self.playImageView.image = nil
-
             // 影をクリア
             self.playImageView.layer.shadowOpacity = 0
         }
@@ -101,5 +124,71 @@ class ShortVideoContentView: NibLoadableView {
     
     @objc private func playOrPause() {
         delegate?.playOrPause()
+    }
+    
+    func updateCurrentTime(
+        currentSecondTime: Float
+    ) {
+        if videoSlider.isTracking {
+            return
+        }
+        videoSlider.value = currentSecondTime
+    }
+}
+
+extension ShortVideoContentView {
+    func setupSliderThumbImage(thumbImage: UIImage?) {
+        self.sliderThumbImage.image = thumbImage
+    }
+    
+    func setupVideoSlider(duration: Float) {
+        videoSlider.minimumValue = 0
+        videoSlider.maximumValue = duration
+        currentTimeLabel.text = formatPlayTime(secondTime: 0)
+        durationTimeLabel.text = formatPlayTime(secondTime: duration)
+    }
+    
+    private func updateThumbnailImagePoint(slider: UISlider) {
+
+        let trackRect = slider.trackRect(forBounds: slider.bounds)
+        let thumbRect = slider.thumbRect(forBounds: slider.bounds, trackRect: trackRect, value: slider.value)
+        let thumbCenterX = thumbRect.midX
+
+        // thumbViewの中心をスライダーのつまみの中心に合わせる
+        let thumbViewCenterX = max(min(thumbCenterX, frame.width - sliderThumbView.frame.width / 2), sliderThumbView.frame.width / 2)
+
+        sliderThumbView.center = CGPoint(x: thumbViewCenterX, y: sliderThumbView.center.y)
+     }
+    
+    private func formatPlayTime(secondTime: Float) -> String {
+        let durationInt = Int(round(secondTime))
+        return String(
+            format: "%02d:%02d",
+            Int(durationInt / 60),
+            Int(durationInt % 60)
+        )
+    }
+}
+
+extension ShortVideoContentView: ShortVideoSliderDelegete {
+    func beginTracking() {
+        UIView.animate(withDuration: 0.1) { [weak self] in
+            self?.baseView?.alpha = 0
+            self?.sliderThumbImageBaseView.alpha = 1
+            self?.videoSlider.transform = CGAffineTransform(scaleX: 0.9, y: 1)
+        }
+    }
+    
+    func endTracking(value: Float) {
+        baseView?.alpha = 1
+        sliderThumbImageBaseView.alpha = 0
+        videoSlider.transform = .identity
+        delegate?.didEndTracking(value: value)
+    }
+    
+    func valueDidChange(value: Float, slider: UISlider) {
+        delegate?.didChangedSliderValue(value: value)
+        currentTimeLabel.text = formatPlayTime(secondTime: value)
+        updateThumbnailImagePoint(slider: slider)
     }
 }

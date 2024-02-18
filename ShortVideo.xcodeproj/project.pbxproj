@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16195DC52B7C9BFA009BA2F8 /* ThumbnailImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16195DC42B7C9BFA009BA2F8 /* ThumbnailImageGenerator.swift */; };
+		16195DC72B7D094F009BA2F8 /* ShortVideoSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16195DC62B7D094F009BA2F8 /* ShortVideoSlider.swift */; };
 		168E49692B779AAB00BDFF06 /* ShortVideoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49682B779AAB00BDFF06 /* ShortVideoApp.swift */; };
 		168E496D2B779AAC00BDFF06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 168E496C2B779AAC00BDFF06 /* Assets.xcassets */; };
 		168E49712B779AAC00BDFF06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 168E49702B779AAC00BDFF06 /* Preview Assets.xcassets */; };
@@ -45,6 +47,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16195DC42B7C9BFA009BA2F8 /* ThumbnailImageGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailImageGenerator.swift; sourceTree = "<group>"; };
+		16195DC62B7D094F009BA2F8 /* ShortVideoSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortVideoSlider.swift; sourceTree = "<group>"; };
 		168E49652B779AAB00BDFF06 /* ShortVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShortVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		168E49682B779AAB00BDFF06 /* ShortVideoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortVideoApp.swift; sourceTree = "<group>"; };
 		168E496C2B779AAC00BDFF06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 				168E49BF2B77A37E00BDFF06 /* VideoPreviewView.xib */,
 				168E49CC2B77B61600BDFF06 /* ShortVideoContentView.swift */,
 				168E49CA2B77B5F800BDFF06 /* ShortVideoContentView.xib */,
+				16195DC62B7D094F009BA2F8 /* ShortVideoSlider.swift */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 				168E49C82B77A50100BDFF06 /* CollectionLayout.swift */,
 				168E49BA2B77A2DF00BDFF06 /* NibBundler.swift */,
 				168E49B82B77A26200BDFF06 /* NibOwnerLoadable.swift */,
+				16195DC42B7C9BFA009BA2F8 /* ThumbnailImageGenerator.swift */,
 			);
 			path = Foundations;
 			sourceTree = "<group>";
@@ -316,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				168E498F2B779E5D00BDFF06 /* VideoPlayer.swift in Sources */,
+				16195DC52B7C9BFA009BA2F8 /* ThumbnailImageGenerator.swift in Sources */,
 				168E49C72B77A40700BDFF06 /* AVPlayer_Extensions.swift in Sources */,
 				168E49C52B77A3E100BDFF06 /* NSObject_Extensions.swift in Sources */,
 				168E49852B779DE700BDFF06 /* ShortVideoCell.swift in Sources */,
@@ -325,6 +332,7 @@
 				168E49BD2B77A34700BDFF06 /* Sample.swift in Sources */,
 				168E49CD2B77B61600BDFF06 /* ShortVideoContentView.swift in Sources */,
 				168E499E2B77A0AC00BDFF06 /* Video.swift in Sources */,
+				16195DC72B7D094F009BA2F8 /* ShortVideoSlider.swift in Sources */,
 				168E49B92B77A26200BDFF06 /* NibOwnerLoadable.swift in Sources */,
 				168E49862B779DE700BDFF06 /* ShortVideosViewModel.swift in Sources */,
 				168E49C02B77A37E00BDFF06 /* VideoPreviewView.swift in Sources */,

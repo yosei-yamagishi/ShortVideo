@@ -13,6 +13,7 @@ class ShortVideosController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private let videoPlayer: VideoPlayerProtocol
     private let viewModel: ShortVideosViewModel
+    private var thumbnailImageGenerator: ThumbnailImageGenerator?
 
     init(
         videoPlayer: VideoPlayerProtocol = VideoPlayer(),
@@ -39,17 +40,12 @@ class ShortVideosController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationItem.largeTitleDisplayMode = .never
         
-        shortVideoCollectionView.setupVideos(
-            videos: viewModel.state.videos
-        )
-        shortVideoCollectionView.setupPlayer(
-            avPlayer: videoPlayer.player
-        )
         viewModel.send(.viewWillAppear)
     }
     
     private func bindViewModel() {
         viewModel.$state.map(\.isMuted)
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] isMuted in
                 guard let self else { return }
@@ -60,6 +56,7 @@ class ShortVideosController: UIViewController {
             }).store(in: &cancellables)
         
         viewModel.$state.map(\.isLiked)
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] isLiked in
                 guard let self else { return }
@@ -70,12 +67,43 @@ class ShortVideosController: UIViewController {
             }).store(in: &cancellables)
         
         viewModel.$state.map(\.isPlaying)
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] isPlaying in
                 guard let self else { return }
                 self.shortVideoCollectionView.playOrPause(
                     isPlaying: isPlaying,
                     currentIndex: self.viewModel.state.currentIndex
+                )
+            }).store(in: &cancellables)
+        
+        viewModel.$state.map(\.currentIndex)
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] currentIndex in
+                guard let self else { return }
+                let video = self.viewModel.state.videos[currentIndex]
+                self.shortVideoCollectionView.setup(
+                    currentIndex: currentIndex,
+                    video: video
+                )
+                self.thumbnailImageGenerator = ThumbnailImageGenerator(
+                    url: video.videoUrl
+                )
+                self.shortVideoCollectionView.setupPlayer(
+                    avPlayer: self.videoPlayer.player,
+                    currentIndex: currentIndex
+                )
+            }).store(in: &cancellables)
+        
+        viewModel.$state.map(\.currentSecondTime)
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] currentSecondTime in
+                guard let self else { return }
+                self.shortVideoCollectionView.updateCurrentTime(
+                    currentIndex: self.viewModel.state.currentIndex,
+                    currentSecondTime: currentSecondTime
                 )
             }).store(in: &cancellables)
     }
@@ -110,6 +138,24 @@ extension ShortVideosController: UICollectionViewDataSource {
 }
 
 extension ShortVideosController: ShortVideoContentViewDelegate {
+    func didEndTracking(value: Float) {
+        viewModel.send(
+            .didEndTracking(value: value)
+        )
+    }
+    
+    func didChangedSliderValue(value: Float) {
+        Task.detached {
+            do {
+                let thumbImage = try await self.thumbnailImageGenerator?.updateThumbnail(currentSecond: value)
+                await self.shortVideoCollectionView.setThumbImageForSeeking(
+                    currentIndex: self.viewModel.state.currentIndex,
+                    thumbImage: thumbImage
+                )
+            }
+        }
+    }
+    
     func playOrPause() {
         viewModel.send(.playOrPause)
     }
@@ -131,9 +177,6 @@ extension ShortVideosController: VideoCollectionViewDelegate {
             )
         )
         viewModel.send(.didChangeVideo(currentIndex: currentIndex))
-        shortVideoCollectionView.setupPlayer(
-            avPlayer: videoPlayer.player
-        )
         viewModel.send(.playVideo)
     }
 }

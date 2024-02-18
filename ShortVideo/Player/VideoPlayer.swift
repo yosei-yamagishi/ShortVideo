@@ -16,7 +16,6 @@ protocol VideoPlayerControlProtocol {
     func skipBackward()
     func setPlaybackRate(rate: Float)
     func setCurrentTime(currentTime: Float)
-    func startObservePlayerTimer()
     func play(isMuted: Bool)
     func pauseAndInit()
     func mute(isMuted: Bool)
@@ -25,11 +24,11 @@ protocol VideoPlayerControlProtocol {
 
 protocol VideoPlayerDelegate: AnyObject {
     func didPlayToEndTime()
-    func didPostIntervalTime(currentTime: Float)
+    func didPostIntervalTime(currentSecondTime: Float)
 }
 
 class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
-    static let timeInterval: TimeInterval = 0.1
+    static let timeInterval: TimeInterval = 0.01
     static let skipInterval: Float = 10.0
     
     enum PlaybackRate: Float, CaseIterable {
@@ -43,7 +42,7 @@ class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
         case speed200 = 2.0
     }
 
-    private var timeerObserver: Any?
+    private var timerObserver: Any?
     var delegate: VideoPlayerDelegate?
     var player: AVPlayer?
     
@@ -59,6 +58,8 @@ class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
     func prepare(url: URL) {
         let item = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: item)
+        setupEndPlaybackObserver()
+        startObservePlayerTimer()
     }
     
     func playOrPause() {
@@ -79,13 +80,15 @@ class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
     }
     
     func pauseAndInit() {
+        NotificationCenter.default.removeObserver(self)
+        
         player?.pause()
         player?.replaceCurrentItem(with: nil)
-        if let timeerObserver {
+        if let timerObserver {
             player?.removeTimeObserver(
-                timeerObserver
+                timerObserver
             )
-            self.timeerObserver = nil
+            self.timerObserver = nil
         }
         player = nil
         delegate = nil
@@ -126,20 +129,30 @@ class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
         player?.rate = rate
     }
     
-    func startObservePlayerTimer() {
+    private func startObservePlayerTimer() {
         let intervalTime = CMTimeMakeWithSeconds(
             Self.timeInterval,
             preferredTimescale: Int32(NSEC_PER_SEC)
         )
-        timeerObserver = player?.addPeriodicTimeObserver(
+        timerObserver = player?.addPeriodicTimeObserver(
             forInterval: intervalTime,
             queue: nil,
             using: { [weak self] _ in
                 guard let self else { return }
                 self.delegate?.didPostIntervalTime(
-                    currentTime: self.currentTime
+                    currentSecondTime: self.currentTime
                 )
             }
         )
+    }
+
+    private func setupEndPlaybackObserver() {
+        NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime,
+            object: player?.currentItem,
+            queue: .main
+        ) { [weak self] _ in
+            self?.delegate?.didPlayToEndTime()
+        }
     }
 }

@@ -11,6 +11,7 @@ class ShortVideosViewModel: UDFViewModel {
         case playOrPause
         case setCurrentIndex(currentIndex: Int)
         case didChangeVideo(currentIndex: Int)
+        case didEndTracking(value: Float)
     }
     
     struct State {
@@ -18,6 +19,7 @@ class ShortVideosViewModel: UDFViewModel {
         var isMuted: Bool = false
         var isLiked: Bool = false
         var currentIndex: Int = 0
+        var currentSecondTime: Float = 0
         var isPlaying: Bool? = nil
     }
     
@@ -54,17 +56,33 @@ class ShortVideosViewModel: UDFViewModel {
             initAndSetupPlayer(
                 currentIndex: currentIndex
             )
+        case let .didEndTracking(value: value):
+            videoPlayer.setCurrentTime(currentTime: value)
         }
+    }
+}
+
+extension ShortVideosViewModel: VideoPlayerDelegate {
+    func didPlayToEndTime() {
+        videoPlayer.setCurrentTime(
+            currentTime: .zero
+        )
+        videoPlayer.play(isMuted: state.isMuted)
+    }
+    
+    func didPostIntervalTime(
+        currentSecondTime: Float
+    ) {
+        state.currentSecondTime = currentSecondTime
     }
 }
 
 extension ShortVideosViewModel {
     private func initAndSetupPlayer(currentIndex: Int = 0) {
         videoPlayer.pauseAndInit()
-        let videoUrlString = state.videos[currentIndex].videoUrlString
-        let url = Bundle.main.bundleURL
-            .appendingPathComponent(videoUrlString)
+        let url = state.videos[currentIndex].videoUrl
         videoPlayer.prepare(url: url)
+        videoPlayer.delegate = self
     }
     
     private func playVideo() {

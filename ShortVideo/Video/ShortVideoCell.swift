@@ -10,12 +10,12 @@ class ShortVideoCell: UICollectionViewCell {
     }
 
     @IBOutlet weak var shortVideoView: ShortVideoView!
-    @IBOutlet weak var shortContentVideoView: ShortVideoContentView!
+    @IBOutlet weak var shortVideoContentView: ShortVideoContentView!
     
     func setShortVideoContentDelegate(
         delegate: ShortVideoContentViewDelegate
     ) {
-        shortContentVideoView.delegate = delegate
+        shortVideoContentView.delegate = delegate
     }
     
     func setupPlayer(avPlayer: AVPlayer?) {
@@ -27,19 +27,37 @@ class ShortVideoCell: UICollectionViewCell {
     }
 
     func setShortVideoContent(video: Video) {
-        shortContentVideoView.setVideo(video: video)
+        shortVideoContentView.setVideo(video: video)
         shortVideoView.setupThumbnailImage(urlString: video.thumbnailImageUrlString)
     }
     
     func setMuteImage(isMuted: Bool) {
-        shortContentVideoView.setMuteImage(isMuted: isMuted)
+        shortVideoContentView.setMuteImage(isMuted: isMuted)
     }
     
     func setLikeImage(isLiked: Bool) {
-        shortContentVideoView.setLikeImage(isLiked: isLiked)
+        shortVideoContentView.setLikeImage(isLiked: isLiked)
     }
     
     func setPlayImage(isPlaying: Bool?) {
-        shortContentVideoView.setPlayImage(isPlaying: isPlaying)
+        shortVideoContentView.setPlayImage(isPlaying: isPlaying)
+    }
+    
+    func setupSlider(duration: Float) {
+        shortVideoContentView.setupVideoSlider(
+            duration: duration
+        )
+    }
+    
+    func setupThumbImage(thumbImage: UIImage?) {
+        shortVideoContentView.setupSliderThumbImage(thumbImage: thumbImage)
+    }
+    
+    func updateCurrentTime(
+        currentSecondTime: Float
+    ) {
+        shortVideoContentView.updateCurrentTime(
+            currentSecondTime: currentSecondTime
+        )
     }
 }
