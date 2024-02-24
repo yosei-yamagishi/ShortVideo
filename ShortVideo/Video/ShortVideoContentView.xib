@@ -30,6 +30,10 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="593"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3A-7K-4dg">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="593"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZM-oR-bqT">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="555"/>
                     <subviews>
@@ -108,10 +112,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E6E-MJ-7v1">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="593"/>
                     <subviews>
-                        <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3A-7K-4dg">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="593"/>
-                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASw-6f-Ljv">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="593"/>
                             <subviews>
@@ -268,20 +268,16 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="ASw-6f-Ljv" secondAttribute="bottom" id="2NN-nJ-NIh"/>
                         <constraint firstAttribute="trailing" secondItem="ASw-6f-Ljv" secondAttribute="trailing" id="B3A-FD-xiY"/>
-                        <constraint firstItem="N3A-7K-4dg" firstAttribute="leading" secondItem="E6E-MJ-7v1" secondAttribute="leading" id="Iui-24-4ba"/>
                         <constraint firstItem="33q-rz-sK9" firstAttribute="leading" secondItem="E6E-MJ-7v1" secondAttribute="leading" id="JwP-If-0fd"/>
                         <constraint firstItem="9gX-8p-ypd" firstAttribute="leading" secondItem="33q-rz-sK9" secondAttribute="trailing" id="Kld-dn-OuG"/>
                         <constraint firstAttribute="trailing" secondItem="Cgh-63-yzK" secondAttribute="trailing" id="NMU-MN-t2i"/>
                         <constraint firstItem="ASw-6f-Ljv" firstAttribute="top" secondItem="E6E-MJ-7v1" secondAttribute="top" id="VDc-iN-POi"/>
-                        <constraint firstItem="N3A-7K-4dg" firstAttribute="top" secondItem="E6E-MJ-7v1" secondAttribute="top" id="WDg-3S-3G5"/>
                         <constraint firstAttribute="bottom" secondItem="Cgh-63-yzK" secondAttribute="bottom" id="Xcq-sw-2xD"/>
                         <constraint firstItem="Cgh-63-yzK" firstAttribute="top" secondItem="9gX-8p-ypd" secondAttribute="bottom" constant="8" id="deB-Ki-aKj"/>
                         <constraint firstItem="Cgh-63-yzK" firstAttribute="leading" secondItem="E6E-MJ-7v1" secondAttribute="leading" id="mBy-tl-yl5"/>
-                        <constraint firstAttribute="trailing" secondItem="N3A-7K-4dg" secondAttribute="trailing" id="mlb-s3-jwY"/>
                         <constraint firstItem="Cgh-63-yzK" firstAttribute="top" secondItem="33q-rz-sK9" secondAttribute="bottom" id="qjL-C3-hCd"/>
                         <constraint firstItem="ASw-6f-Ljv" firstAttribute="leading" secondItem="E6E-MJ-7v1" secondAttribute="leading" id="tW1-dR-KRy"/>
                         <constraint firstAttribute="trailing" secondItem="9gX-8p-ypd" secondAttribute="trailing" id="u9B-kN-UpY"/>
-                        <constraint firstAttribute="bottom" secondItem="N3A-7K-4dg" secondAttribute="bottom" id="xnv-VJ-gm1"/>
                     </constraints>
                 </view>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jdS-Lo-Owv" customClass="ShortVideoSlider" customModule="ShortVideo" customModuleProvider="target">
@@ -296,10 +292,14 @@
                 <constraint firstAttribute="trailing" secondItem="tZM-oR-bqT" secondAttribute="trailing" id="BZM-hQ-016"/>
                 <constraint firstItem="E6E-MJ-7v1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DxJ-Q9-TKy"/>
                 <constraint firstAttribute="bottom" secondItem="jdS-Lo-Owv" secondAttribute="bottom" id="Ggd-2z-z7C"/>
+                <constraint firstAttribute="trailing" secondItem="N3A-7K-4dg" secondAttribute="trailing" id="PTq-QG-unE"/>
+                <constraint firstItem="N3A-7K-4dg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Uqz-R5-cVV"/>
                 <constraint firstItem="tZM-oR-bqT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eZZ-mq-vjD"/>
                 <constraint firstItem="jdS-Lo-Owv" firstAttribute="top" secondItem="tZM-oR-bqT" secondAttribute="bottom" constant="8" symbolic="YES" id="iWQ-3I-7ID"/>
                 <constraint firstItem="jdS-Lo-Owv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="id9-WI-RnN"/>
                 <constraint firstItem="tZM-oR-bqT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kuO-ms-xgW"/>
+                <constraint firstAttribute="bottom" secondItem="N3A-7K-4dg" secondAttribute="bottom" id="qxX-FN-J8c"/>
+                <constraint firstItem="N3A-7K-4dg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sie-cQ-Nqy"/>
                 <constraint firstAttribute="bottom" secondItem="E6E-MJ-7v1" secondAttribute="bottom" id="twy-rH-lB6"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
