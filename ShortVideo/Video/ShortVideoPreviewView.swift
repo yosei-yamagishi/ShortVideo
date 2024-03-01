@@ -1,7 +1,7 @@
 import UIKit
 import AVKit
 
-class VideoPreviewView: NibLoadableView {
+class ShortVideoPreviewView: NibLoadableView {
     private var player: AVPlayer? {
         get { playerLayer.player }
         set { playerLayer.player = newValue }
