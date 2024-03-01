@@ -56,6 +56,7 @@ class ShortVideoCollectionView: NibLoadableView {
     func playOrPause(isPlaying: Bool?, currentIndex: Int) {
         guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
         cell.setPlayImage(isPlaying: isPlaying)
+        print(isPlaying)
     }
     
     func setup(currentIndex: Int, video: Video) {
@@ -79,6 +80,20 @@ class ShortVideoCollectionView: NibLoadableView {
     ) {
         guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
         cell.updateCurrentTime(currentSecondTime: currentSecondTime)
+    }
+    
+    func openMoreDetail(
+        currentIndex: Int
+    ) {
+        guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
+        cell.openMoreDetail()
+    }
+    
+    func closeMoreDetail(
+        currentIndex: Int
+    ) {
+        guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
+        cell.closeMoreDetail()
     }
     
     private func getShortVideoCell(

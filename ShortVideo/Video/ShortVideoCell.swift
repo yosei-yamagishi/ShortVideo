@@ -60,4 +60,12 @@ class ShortVideoCell: UICollectionViewCell {
             currentSecondTime: currentSecondTime
         )
     }
+    
+    func openMoreDetail() {
+        shortVideoContentView.openMoreDetail()
+    }
+    
+    func closeMoreDetail() {
+        shortVideoContentView.closeMoreDetail()
+    }
 }
