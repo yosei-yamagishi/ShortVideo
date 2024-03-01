@@ -75,6 +75,48 @@ class ShortVideoContentView: NibLoadableView {
         }
     }
     
+    @IBOutlet weak var moreDetailView: UIView!
+    @IBOutlet weak var moreDetailViewHeight: NSLayoutConstraint! {
+        didSet {
+            moreDetailViewHeight.constant = MoreDetailViewLayout.height
+        }
+    }
+    
+    @IBOutlet weak var moreDetailHeaderView: UIView! {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(
+                target: self,
+                action: #selector(toggleMoreDetail)
+            )
+            moreDetailHeaderView.addGestureRecognizer(tapGesture)
+            moreDetailHeaderView.isUserInteractionEnabled = true
+        }
+    }
+    
+    @IBOutlet weak var moreContentView: UIView! {
+        didSet {
+            moreContentView.alpha = 0
+        }
+    }
+    @IBOutlet weak var moreDetailButton: UIButton! {
+        didSet {
+            moreDetailButton.border(
+                borderCGColor: UIColor.white.cgColor
+            )
+            moreDetailButton.maskCorner(radius: 6)
+        }
+    }
+    
+    struct MoreDetailViewLayout {
+        static var height: CGFloat = 40
+        static var headerHeight: CGFloat = 40
+        static var contentHeight: CGFloat = 76
+        
+        static func isClosed(height: CGFloat) -> Bool {
+            Self.height == height
+        }
+    }
+    
     weak var delegate: ShortVideoContentViewDelegate?
     
     func setVideo(video: Video) {
@@ -137,6 +179,31 @@ class ShortVideoContentView: NibLoadableView {
 }
 
 extension ShortVideoContentView {
+    @objc func toggleMoreDetail() {
+        let isClosed = MoreDetailViewLayout.isClosed(height: moreDetailViewHeight.constant)
+        isClosed ? openMoreDetail() : closeMoreDetail()
+    }
+    
+    func openMoreDetail() {
+        moreDetailViewHeight.constant = MoreDetailViewLayout.contentHeight + MoreDetailViewLayout.height
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            self?.baseView.alpha = 0
+            self?.moreContentView.alpha = 1
+            self?.layoutIfNeeded()
+        }
+    }
+    
+    func closeMoreDetail() {
+        moreDetailViewHeight.constant = MoreDetailViewLayout.height
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            self?.baseView.alpha = 1
+            self?.moreContentView.alpha = 0
+            self?.layoutIfNeeded()
+        }
+    }
+}
+
+extension ShortVideoContentView {
     func setupSliderThumbImage(thumbImage: UIImage?) {
         self.sliderThumbImage.image = thumbImage
     }
@@ -174,13 +241,15 @@ extension ShortVideoContentView: ShortVideoSliderDelegete {
     func beginTracking() {
         UIView.animate(withDuration: 0.1) { [weak self] in
             self?.baseView?.alpha = 0
+            self?.moreDetailView.alpha = 0
             self?.sliderThumbImageBaseView.alpha = 1
             self?.videoSlider.transform = CGAffineTransform(scaleX: 0.9, y: 1)
         }
     }
     
     func endTracking(value: Float) {
-        baseView?.alpha = 1
+        baseView.alpha = 1
+        moreDetailView.alpha = 1
         sliderThumbImageBaseView.alpha = 0
         videoSlider.transform = .identity
         delegate?.didEndTracking(value: value)
