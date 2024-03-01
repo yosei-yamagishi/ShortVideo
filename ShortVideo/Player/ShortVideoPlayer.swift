@@ -1,14 +1,14 @@
 import AVFoundation
 
-protocol VideoPlayerProtocol {
+protocol ShortVideoPlayerProtocol {
     var player: AVPlayer? { get }
 }
 
-protocol VideoPlayerControlProtocol {
+protocol ShortVideoPlayerControlProtocol {
     var isPlaying: Bool { get }
     var currentTime: Float { get }
     var duration: Float { get }
-    var delegate: VideoPlayerDelegate? { get set }
+    var delegate: ShortVideoPlayerDelegate? { get set }
     func playOrPause()
     func play()
     func pause()
@@ -22,12 +22,12 @@ protocol VideoPlayerControlProtocol {
     func prepare(url: URL)
 }
 
-protocol VideoPlayerDelegate: AnyObject {
+protocol ShortVideoPlayerDelegate: AnyObject {
     func didPlayToEndTime()
     func didPostIntervalTime(currentSecondTime: Float)
 }
 
-class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
+class ShortVideoPlayer: ShortVideoPlayerProtocol, ShortVideoPlayerControlProtocol {
     static let timeInterval: TimeInterval = 0.01
     static let skipInterval: Float = 10.0
     
@@ -43,7 +43,7 @@ class VideoPlayer: VideoPlayerProtocol, VideoPlayerControlProtocol {
     }
 
     private var timerObserver: Any?
-    var delegate: VideoPlayerDelegate?
+    var delegate: ShortVideoPlayerDelegate?
     var player: AVPlayer?
     
     var isPlaying: Bool { player?.isPlaying ?? false }

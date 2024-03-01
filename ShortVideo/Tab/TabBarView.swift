@@ -5,7 +5,7 @@ struct TabBarView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UITabBarController {
         let tabBarController = UITabBarController()
 
-        let videoPlayer = VideoPlayer()
+        let videoPlayer = ShortVideoPlayer()
         let viewModel = ShortVideosViewModel(videoPlayer: videoPlayer)
         let controller = ShortVideosController(
             videoPlayer: videoPlayer,

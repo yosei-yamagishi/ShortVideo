@@ -11,12 +11,12 @@ class ShortVideosController: UIViewController {
     }
     
     private var cancellables = Set<AnyCancellable>()
-    private let videoPlayer: VideoPlayerProtocol
+    private let videoPlayer: ShortVideoPlayerProtocol
     private let viewModel: ShortVideosViewModel
     private var thumbnailImageGenerator: ThumbnailImageGenerator?
 
     init(
-        videoPlayer: VideoPlayerProtocol = VideoPlayer(),
+        videoPlayer: ShortVideoPlayerProtocol = ShortVideoPlayer(),
         viewModel: ShortVideosViewModel
     ) {
         self.videoPlayer = videoPlayer
