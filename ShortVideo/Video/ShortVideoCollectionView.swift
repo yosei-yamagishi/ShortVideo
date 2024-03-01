@@ -58,7 +58,7 @@ class ShortVideoCollectionView: NibLoadableView {
         cell.setPlayImage(isPlaying: isPlaying)
     }
     
-    func setup(currentIndex: Int, video: Video) {
+    func setup(currentIndex: Int, video: ShortVideo) {
         guard let cell = getShortVideoCell(currentIndex: currentIndex) else { return }
         cell.setupSlider(
             duration: video.secondDuration

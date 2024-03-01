@@ -15,7 +15,7 @@ class ShortVideosViewModel: UDFViewModel {
     }
     
     struct State {
-        var videos: [Video] = Video.sampleVideos()
+        var videos: [ShortVideo] = ShortVideo.sampleVideos()
         var isMuted: Bool = false
         var isLiked: Bool = false
         var currentIndex: Int = 0
