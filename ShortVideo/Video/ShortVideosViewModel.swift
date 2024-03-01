@@ -15,7 +15,7 @@ class ShortVideosViewModel: UDFViewModel {
     }
     
     struct State {
-        var videos: [Video] = Video.sampleVideos()
+        var videos: [ShortVideo] = ShortVideo.sampleVideos()
         var isMuted: Bool = false
         var isLiked: Bool = false
         var currentIndex: Int = 0
@@ -24,11 +24,11 @@ class ShortVideosViewModel: UDFViewModel {
     }
     
     @Published var state: State
-    private var videoPlayer: VideoPlayerControlProtocol
+    private var videoPlayer: ShortVideoPlayerControlProtocol
     
     init(
         state: State = State(),
-        videoPlayer: VideoPlayerControlProtocol = VideoPlayer()
+        videoPlayer: ShortVideoPlayerControlProtocol = ShortVideoPlayer()
     ) {
         self.state = state
         self.videoPlayer = videoPlayer
@@ -62,7 +62,7 @@ class ShortVideosViewModel: UDFViewModel {
     }
 }
 
-extension ShortVideosViewModel: VideoPlayerDelegate {
+extension ShortVideosViewModel: ShortVideoPlayerDelegate {
     func didPlayToEndTime() {
         videoPlayer.setCurrentTime(
             currentTime: .zero

@@ -3,7 +3,7 @@ import AVKit
 
 class ShortVideoView: NibLoadableView {
 
-    @IBOutlet weak var videoPreviewView: VideoPreviewView!
+    @IBOutlet weak var videoPreviewView: ShortVideoPreviewView!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     
     func setupPlayer(avPlayer: AVPlayer?) {

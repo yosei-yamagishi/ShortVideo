@@ -119,7 +119,7 @@ class ShortVideoContentView: NibLoadableView {
     
     weak var delegate: ShortVideoContentViewDelegate?
     
-    func setVideo(video: Video) {
+    func setVideo(video: ShortVideo) {
         titleLabel.text = video.title
         descriptionLabel.text = video.description
     }

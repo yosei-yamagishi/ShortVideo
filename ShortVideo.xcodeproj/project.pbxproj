@@ -20,21 +20,21 @@
 		168E49882B779DE700BDFF06 /* ShortVideoCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 168E49832B779DE700BDFF06 /* ShortVideoCollectionView.xib */; };
 		168E498B2B779DF800BDFF06 /* ShortVideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49892B779DF800BDFF06 /* ShortVideosController.swift */; };
 		168E498C2B779DF800BDFF06 /* ShortVideosController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 168E498A2B779DF800BDFF06 /* ShortVideosController.xib */; };
-		168E498F2B779E5D00BDFF06 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E498E2B779E5D00BDFF06 /* VideoPlayer.swift */; };
+		168E498F2B779E5D00BDFF06 /* ShortVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E498E2B779E5D00BDFF06 /* ShortVideoPlayer.swift */; };
 		168E49972B779FCD00BDFF06 /* movie4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 168E49922B779FCC00BDFF06 /* movie4.mp4 */; };
 		168E49982B779FCD00BDFF06 /* movie3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 168E49932B779FCC00BDFF06 /* movie3.mp4 */; };
 		168E49992B779FCD00BDFF06 /* movie5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 168E49942B779FCC00BDFF06 /* movie5.mp4 */; };
 		168E499A2B779FCD00BDFF06 /* movie2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 168E49952B779FCC00BDFF06 /* movie2.mp4 */; };
 		168E499B2B779FCD00BDFF06 /* movie1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 168E49962B779FCD00BDFF06 /* movie1.mp4 */; };
-		168E499E2B77A0AC00BDFF06 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E499D2B77A0AC00BDFF06 /* Video.swift */; };
+		168E499E2B77A0AC00BDFF06 /* ShortVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E499D2B77A0AC00BDFF06 /* ShortVideo.swift */; };
 		168E49A12B77A10600BDFF06 /* UIView_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49A02B77A10600BDFF06 /* UIView_Extensions.swift */; };
 		168E49A42B77A17900BDFF06 /* ShortVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 168E49A22B77A17800BDFF06 /* ShortVideoView.xib */; };
 		168E49A52B77A17900BDFF06 /* ShortVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49A32B77A17900BDFF06 /* ShortVideoView.swift */; };
 		168E49B92B77A26200BDFF06 /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49B82B77A26200BDFF06 /* NibOwnerLoadable.swift */; };
 		168E49BB2B77A2DF00BDFF06 /* NibBundler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49BA2B77A2DF00BDFF06 /* NibBundler.swift */; };
 		168E49BD2B77A34700BDFF06 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49BC2B77A34700BDFF06 /* Sample.swift */; };
-		168E49C02B77A37E00BDFF06 /* VideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49BE2B77A37E00BDFF06 /* VideoPreviewView.swift */; };
-		168E49C12B77A37E00BDFF06 /* VideoPreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 168E49BF2B77A37E00BDFF06 /* VideoPreviewView.xib */; };
+		168E49C02B77A37E00BDFF06 /* ShortVideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49BE2B77A37E00BDFF06 /* ShortVideoPreviewView.swift */; };
+		168E49C12B77A37E00BDFF06 /* ShortVideoPreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 168E49BF2B77A37E00BDFF06 /* ShortVideoPreviewView.xib */; };
 		168E49C32B77A3B700BDFF06 /* UICollectionView_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49C22B77A3B700BDFF06 /* UICollectionView_Extensions.swift */; };
 		168E49C52B77A3E100BDFF06 /* NSObject_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49C42B77A3E100BDFF06 /* NSObject_Extensions.swift */; };
 		168E49C72B77A40700BDFF06 /* AVPlayer_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168E49C62B77A40700BDFF06 /* AVPlayer_Extensions.swift */; };
@@ -62,21 +62,21 @@
 		168E49832B779DE700BDFF06 /* ShortVideoCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShortVideoCollectionView.xib; sourceTree = "<group>"; };
 		168E49892B779DF800BDFF06 /* ShortVideosController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVideosController.swift; sourceTree = "<group>"; };
 		168E498A2B779DF800BDFF06 /* ShortVideosController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShortVideosController.xib; sourceTree = "<group>"; };
-		168E498E2B779E5D00BDFF06 /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		168E498E2B779E5D00BDFF06 /* ShortVideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVideoPlayer.swift; sourceTree = "<group>"; };
 		168E49922B779FCC00BDFF06 /* movie4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie4.mp4; sourceTree = "<group>"; };
 		168E49932B779FCC00BDFF06 /* movie3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie3.mp4; sourceTree = "<group>"; };
 		168E49942B779FCC00BDFF06 /* movie5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie5.mp4; sourceTree = "<group>"; };
 		168E49952B779FCC00BDFF06 /* movie2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie2.mp4; sourceTree = "<group>"; };
 		168E49962B779FCD00BDFF06 /* movie1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie1.mp4; sourceTree = "<group>"; };
-		168E499D2B77A0AC00BDFF06 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		168E499D2B77A0AC00BDFF06 /* ShortVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVideo.swift; sourceTree = "<group>"; };
 		168E49A02B77A10600BDFF06 /* UIView_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView_Extensions.swift; sourceTree = "<group>"; };
 		168E49A22B77A17800BDFF06 /* ShortVideoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShortVideoView.xib; sourceTree = "<group>"; };
 		168E49A32B77A17900BDFF06 /* ShortVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVideoView.swift; sourceTree = "<group>"; };
 		168E49B82B77A26200BDFF06 /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
 		168E49BA2B77A2DF00BDFF06 /* NibBundler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibBundler.swift; sourceTree = "<group>"; };
 		168E49BC2B77A34700BDFF06 /* Sample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
-		168E49BE2B77A37E00BDFF06 /* VideoPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPreviewView.swift; sourceTree = "<group>"; };
-		168E49BF2B77A37E00BDFF06 /* VideoPreviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPreviewView.xib; sourceTree = "<group>"; };
+		168E49BE2B77A37E00BDFF06 /* ShortVideoPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortVideoPreviewView.swift; sourceTree = "<group>"; };
+		168E49BF2B77A37E00BDFF06 /* ShortVideoPreviewView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShortVideoPreviewView.xib; sourceTree = "<group>"; };
 		168E49C22B77A3B700BDFF06 /* UICollectionView_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView_Extensions.swift; sourceTree = "<group>"; };
 		168E49C42B77A3E100BDFF06 /* NSObject_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject_Extensions.swift; sourceTree = "<group>"; };
 		168E49C62B77A40700BDFF06 /* AVPlayer_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayer_Extensions.swift; sourceTree = "<group>"; };
@@ -152,8 +152,8 @@
 				168E49822B779DE600BDFF06 /* ShortVideoCell.xib */,
 				168E49A32B77A17900BDFF06 /* ShortVideoView.swift */,
 				168E49A22B77A17800BDFF06 /* ShortVideoView.xib */,
-				168E49BE2B77A37E00BDFF06 /* VideoPreviewView.swift */,
-				168E49BF2B77A37E00BDFF06 /* VideoPreviewView.xib */,
+				168E49BE2B77A37E00BDFF06 /* ShortVideoPreviewView.swift */,
+				168E49BF2B77A37E00BDFF06 /* ShortVideoPreviewView.xib */,
 				168E49CC2B77B61600BDFF06 /* ShortVideoContentView.swift */,
 				168E49CA2B77B5F800BDFF06 /* ShortVideoContentView.xib */,
 				16195DC62B7D094F009BA2F8 /* ShortVideoSlider.swift */,
@@ -172,7 +172,7 @@
 		168E498D2B779E5400BDFF06 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				168E498E2B779E5D00BDFF06 /* VideoPlayer.swift */,
+				168E498E2B779E5D00BDFF06 /* ShortVideoPlayer.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -202,7 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				168E49BC2B77A34700BDFF06 /* Sample.swift */,
-				168E499D2B77A0AC00BDFF06 /* Video.swift */,
+				168E499D2B77A0AC00BDFF06 /* ShortVideo.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -308,7 +308,7 @@
 				168E496D2B779AAC00BDFF06 /* Assets.xcassets in Resources */,
 				168E499B2B779FCD00BDFF06 /* movie1.mp4 in Resources */,
 				168E49982B779FCD00BDFF06 /* movie3.mp4 in Resources */,
-				168E49C12B77A37E00BDFF06 /* VideoPreviewView.xib in Resources */,
+				168E49C12B77A37E00BDFF06 /* ShortVideoPreviewView.xib in Resources */,
 				168E49992B779FCD00BDFF06 /* movie5.mp4 in Resources */,
 				168E49882B779DE700BDFF06 /* ShortVideoCollectionView.xib in Resources */,
 			);
@@ -321,7 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				168E498F2B779E5D00BDFF06 /* VideoPlayer.swift in Sources */,
+				168E498F2B779E5D00BDFF06 /* ShortVideoPlayer.swift in Sources */,
 				16195DC52B7C9BFA009BA2F8 /* ThumbnailImageGenerator.swift in Sources */,
 				168E49C72B77A40700BDFF06 /* AVPlayer_Extensions.swift in Sources */,
 				168E49C52B77A3E100BDFF06 /* NSObject_Extensions.swift in Sources */,
@@ -331,11 +331,11 @@
 				168E49A12B77A10600BDFF06 /* UIView_Extensions.swift in Sources */,
 				168E49BD2B77A34700BDFF06 /* Sample.swift in Sources */,
 				168E49CD2B77B61600BDFF06 /* ShortVideoContentView.swift in Sources */,
-				168E499E2B77A0AC00BDFF06 /* Video.swift in Sources */,
+				168E499E2B77A0AC00BDFF06 /* ShortVideo.swift in Sources */,
 				16195DC72B7D094F009BA2F8 /* ShortVideoSlider.swift in Sources */,
 				168E49B92B77A26200BDFF06 /* NibOwnerLoadable.swift in Sources */,
 				168E49862B779DE700BDFF06 /* ShortVideosViewModel.swift in Sources */,
-				168E49C02B77A37E00BDFF06 /* VideoPreviewView.swift in Sources */,
+				168E49C02B77A37E00BDFF06 /* ShortVideoPreviewView.swift in Sources */,
 				168E49782B779D4700BDFF06 /* TabBarView.swift in Sources */,
 				168E49C92B77A50100BDFF06 /* CollectionLayout.swift in Sources */,
 				168E49C32B77A3B700BDFF06 /* UICollectionView_Extensions.swift in Sources */,

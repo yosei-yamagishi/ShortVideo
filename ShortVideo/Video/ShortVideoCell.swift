@@ -26,7 +26,7 @@ class ShortVideoCell: UICollectionViewCell {
         shortVideoView.resetPlayer()
     }
 
-    func setShortVideoContent(video: Video) {
+    func setShortVideoContent(video: ShortVideo) {
         shortVideoContentView.setVideo(video: video)
         shortVideoView.setupThumbnailImage(urlString: video.thumbnailImageUrlString)
     }
